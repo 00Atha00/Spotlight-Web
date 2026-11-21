@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Spotlite - Mockup v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Bar pindah halaman (khusus mockup, hapus saat jadi aplikasi) -->
+<div class="mocktabs">
+  <a href="#home" data-tab="home">1 Home</a><a href="#events" data-tab="events">2 Events</a><a href="#detail" data-tab="detail">3 Detail</a>
+  <a href="#checkout" data-tab="checkout">4 Checkout</a><a href="#pesanan" data-tab="pesanan">5 Pesanan</a><a href="#cek" data-tab="cek">6 Cek Tiket</a><a href="#admin" data-tab="admin">7 Admin</a>
+  <button onclick="openAuth()">Sign in (modal)</button>
+</div>
+
+<!-- ===== HEADER ===== -->
+<header class="hd"><div class="wrap">
+  <a href="#home" class="logo"><i></i><b>Spotlite</b></a>
+  <nav class="nav">
+    <a href="#home" data-nav="home">Home</a><a href="#events" data-nav="events">Events</a><a href="#cek" data-nav="cek">Cek Tiket</a><a href="#pesanan" data-nav="pesanan">Pesanan Saya</a>
+  </nav>
+  <div class="hr">
+    <button class="ic" id="bSearch" aria-label="Cari"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+    <button class="ic" id="bLang" aria-label="Bahasa"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></button>
+    <button class="btn sm" id="bAuth" onclick="openAuth()">Sign in</button>
+    <div class="dd" id="ddSearch">
+      <input class="f" placeholder="Cari konser atau penampil...">
+      <select class="f" id="selCity" onchange="document.getElementById('selVenue').disabled=!this.value"><option value="">Kota</option><option>Jakarta</option><option>Bandung</option><option>Surabaya</option><option>Bali</option></select>
+      <select class="f" id="selVenue" disabled><option>Pilih kota dulu</option><option>Semua venue</option></select>
+      <button class="btn w" onclick="closeDD();location.hash='events'">Cari</button>
+    </div>
+    <div class="dd" id="ddLang" style="min-width:200px">
+      <div class="mut" style="font-size:11px;letter-spacing:1px;margin-bottom:6px">BAHASA</div>
+      <div class="opt on" onclick="pickLang(this)"><span>Bahasa Indonesia</span><span>&#10003;</span></div>
+      <div class="opt" onclick="pickLang(this)"><span>English</span><span></span></div>
+    </div>
+  </div>
+</div></header>
+
+<main>
+<!-- ===== HALAMAN: 1 HOME ===== -->
+<section class="page" id="p-home">
+  <div class="wrap hero">
+    <div class="eyebrow">TIKET RESMI · ANTI PHISHING</div>
+    <h1>Temukan konser K-pop<br>berikutnya</h1>
+    <p>Pilih konser, beli tiket resmi, dan cek keasliannya kapan saja.</p>
+    <div class="arcwrap">
+      <button class="arrow l" onclick="move(-1)" aria-label="Sebelumnya"><svg viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></svg></button>
+      <button class="arrow r" onclick="move(1)" aria-label="Berikutnya"><svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></button>
+      <div class="arc" id="arc"><div class="stage" id="stage"></div></div>
+    </div>
+    <div class="now" id="now"></div>
+  </div>
+  <div class="wrap sec">
+    <div class="eyebrow">POPULER</div><h2>Konser pilihan untukmu</h2>
+    <div class="grid4" id="gridHome"></div>
+  </div>
+  <div class="wrap sec">
+    <div class="eyebrow">PANDUAN</div><h2>Cara beli tiket</h2>
+    <div class="steps">
+      <div class="card step"><b>1</b><h3>Pilih konser</h3><p class="mut">Telusuri jadwal dan buka halaman acara.</p></div>
+      <div class="card step"><b>2</b><h3>Sign in</h3><p class="mut">Masuk agar pembelianmu tercatat dan bisa dikonfirmasi.</p></div>
+      <div class="card step"><b>3</b><h3>Checkout</h3><p class="mut">Pilih kategori, isi jumlah, periksa total.</p></div>
+      <div class="card step"><b>4</b><h3>Bayar tepat waktu</h3><p class="mut">Selesaikan sebelum batas waktu habis.</p></div>
+    </div>
+  </div>
+  <div class="wrap sec">
+    <div class="banner"><div><div class="eyebrow">CEK KEASLIAN</div><h2>Ragu dengan tiketmu?</h2><p class="mut" style="margin-top:4px">Masukkan kode tiket dan pastikan tiketnya asli.</p></div><a class="btn" href="#cek">Cek tiket sekarang</a></div>
+  </div>
+</section>
+
+<!-- ===== HALAMAN: 2 EVENTS ===== -->
+<section class="page" id="p-events">
+  <div class="wrap">
+    <div class="crumb">Spotlite / Events</div>
+    <div class="sbar"><div class="in"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg> Cari konser, penampil, atau kota...</div><span class="chip on">Daftar</span><span class="chip">Kalender</span></div>
+    <div class="tabs4"><div class="on">Mendatang<small>8 konser</small></div><div>Minggu ini<small>0 konser</small></div><div>Lalu<small>12 konser</small></div><div>Semua<small>20 konser</small></div></div>
+    <div class="grid4" id="gridEvents"></div>
+  </div>
+</section>
+
+<!-- ===== HALAMAN: 3 DETAIL ===== -->
+<section class="page" id="p-detail">
+  <div class="wrap">
+    <div class="crumb"><a href="#events">Events</a> / <span id="dCrumb"></span></div>
+    <div class="two">
+      <div>
+        <div class="card" style="display:flex;gap:22px;flex-wrap:wrap">
+          <div style="width:230px;flex:none" id="dPoster"></div>
+          <div style="flex:1;min-width:220px">
+            <span class="badge b-soon">K-pop</span>
+            <h1 style="font-size:32px;margin:10px 0 6px" id="dTitle"></h1>
+            <div class="mut" id="dMeta"></div>
+            <p class="mut" style="margin-top:14px">Konser tur resmi dengan tiket QR code unik. Keaslian tiket bisa dicek di halaman Cek Tiket sebelum acara.</p>
+          </div>
+        </div>
+        <div class="card" style="margin-top:18px"><h3>Prakiraan cuaca lokasi</h3>
+          <div style="display:flex;gap:28px;margin-top:10px;align-items:center"><div><b style="font-size:26px">29°C</b><div class="mut" style="font-size:12px">Berawan</div></div><div class="mut" style="font-size:12px">Hujan 20% · Angin 12 km/jam<br><span style="color:var(--pink)">Sumber: Open-Meteo</span></div></div></div>
+      </div>
+      <div><div class="card"><h3>Pilih kategori tiket</h3>
+        <div id="cats"></div>
+        <div class="row" style="border:0"><span class="mut">Total</span><b style="font-size:20px" id="dTotal">Rp0</b></div>
+        <div class="errmsg" id="dErr"></div>
+        <button class="btn w" onclick="toCheckout()">Lanjut ke checkout</button>
+        <p class="mut" style="font-size:11px;margin-top:8px;text-align:center">Maksimal 4 tiket per pesanan</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HALAMAN: 4 CHECKOUT ===== -->
+<section class="page" id="p-checkout">
+  <div class="wrap"><div class="crumb">Spotlite / Checkout</div><h2>Checkout</h2><p class="mut">Periksa pesananmu lalu bayar sebelum waktu habis.</p>
+    <div class="two">
+      <div>
+        <div class="card" style="display:flex;gap:16px;align-items:center;margin-bottom:18px"><div style="width:84px;flex:none" id="cPoster"></div><div><h3 id="cTitle"></h3><div class="mut" id="cMeta" style="font-size:12px"></div></div></div>
+        <div class="card"><h3>Data pembeli</h3>
+          <label class="lb">Nama lengkap</label><input class="field" value="Athalia">
+          <label class="lb">Email</label><input class="field" value="name@email.com">
+          <label class="lb">Nomor HP</label><input class="field" id="cHp" value="0812">
+          <div class="errmsg" id="hpErr">Nomor HP minimal 10 digit.</div></div>
+      </div>
+      <div><div class="card">
+        <div class="timer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Bayar dalam <b id="tm">15:00</b></div>
+        <div class="row"><span class="mut" id="cLine"></span><b id="cSub"></b></div>
+        <div class="row"><span class="mut">Biaya layanan</span><b>Rp10.000</b></div>
+        <div class="row" style="border:0"><b>Total bayar</b><b style="font-size:20px;color:var(--pink)" id="cTot"></b></div>
+        <button class="btn w" onclick="pay()">Bayar sekarang</button>
+        <p class="mut" style="font-size:11px;margin-top:8px;text-align:center">Pembayaran bersifat simulasi</p></div></div>
+    </div></div>
+</section>
+
+<!-- ===== HALAMAN: 5 PESANAN ===== -->
+<section class="page" id="p-pesanan">
+  <div class="wrap"><div class="crumb">Spotlite / Pesanan Saya</div><h2>Pesanan saya</h2>
+    <div style="display:flex;gap:8px;margin:14px 0 18px;flex-wrap:wrap"><span class="chip on">Semua</span><span class="chip">Menunggu bayar</span><span class="chip">Lunas</span><span class="chip">Kedaluwarsa</span></div>
+    <div class="card order"><div class="qr"></div><div style="flex:1;min-width:200px"><span class="badge b-ok">Lunas</span><h3 style="margin-top:8px">ENHYPEN - WORLD TOUR: JAKARTA</h3><div class="mut" style="font-size:12px">CAT 1 × 2 · 12 Des 2026 · Kode: SPL-8F2K-91QD</div></div><a class="btn ghost" href="#cek">Cek keaslian</a></div>
+    <div class="card order"><div style="width:100px;flex:none" id="oPoster2"></div><div style="flex:1;min-width:200px"><span class="badge b-warn">Menunggu pembayaran</span><h3 style="margin-top:8px">NCT 127 - NEO CITY: BANDUNG</h3><div class="mut" style="font-size:12px">Festival × 1 · Sisa waktu 09:41</div></div><button class="btn" onclick="location.hash='checkout'">Bayar sekarang</button></div>
+    <div class="card order"><div style="width:100px;flex:none" id="oPoster3"></div><div style="flex:1;min-width:200px"><span class="badge b-bad">Kedaluwarsa</span><h3 style="margin-top:8px">EXO - PLANET TOUR: SURABAYA</h3><div class="mut" style="font-size:12px">VIP × 2 · Waktu pembayaran habis</div></div><button class="btn ghost" onclick="location.hash='events'">Pesan lagi</button></div>
+  </div>
+</section>
+
+<!-- ===== HALAMAN: 6 CEK TIKET ===== -->
+<section class="page" id="p-cek">
+  <div class="wrap" style="max-width:760px"><div class="crumb">Spotlite / Cek Tiket</div><div class="eyebrow">ANTI PHISHING</div><h1 style="font-size:36px">Cek keaslian tiket</h1>
+    <p class="mut" style="margin:8px 0 18px">Masukkan kode di tiketmu untuk memastikan tiket resmi dan belum dipakai.</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap"><input class="field" id="kode" style="flex:1;min-width:220px;margin:0" placeholder="Contoh: SPL-8F2K-91QD"><button class="btn" onclick="cekTiket()">Periksa</button></div>
+    <p class="mut" style="font-size:12px;margin-top:8px">Coba kode demo: <a href="#" style="color:var(--pink)" onclick="fill('SPL-8F2K-91QD');return false">SPL-8F2K-91QD</a> (asli), <a href="#" style="color:var(--pink)" onclick="fill('SPL-USED-0001');return false">SPL-USED-0001</a> (sudah dipakai), atau kode lain.</p>
+    <div class="card res" id="res"></div>
+  </div>
+</section>
+
+<!-- ===== HALAMAN: 7 ADMIN ===== -->
+<section class="page" id="p-admin">
+  <div class="wrap"><div class="crumb">Spotlite / Admin</div>
+    <div class="dash">
+      <div class="card side" style="height:fit-content;padding:14px"><a class="on">Konser</a><a>Kategori tiket</a><a>Pesanan</a><a>Validasi tiket</a></div>
+      <div>
+        <div class="stats"><div class="card"><span class="mut">Konser aktif</span><b>8</b></div><div class="card"><span class="mut">Tiket terjual</span><b>1.284</b></div><div class="card"><span class="mut">Pendapatan</span><b>Rp812 jt</b></div></div>
+        <div class="card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><h3>Daftar konser</h3><button class="btn sm">+ Tambah konser</button></div>
+          <div style="overflow-x:auto"><table><thead><tr><th>Konser</th><th>Tanggal</th><th>Kota</th><th>Status</th><th>Aksi</th></tr></thead><tbody id="tbody"></tbody></table></div></div>
+      </div>
+    </div></div>
+</section>
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="ft"><div class="wrap"><div class="ftc">
+  <div class="ftg">
+    <div><div class="logo"><i></i><b>Spotlite</b></div><p class="mut" style="margin:10px 0 14px">Tiket konser K-pop resmi, cepat, dan bisa dicek keasliannya.</p><a class="btn sm" href="#events" style="display:inline-flex;color:#fff;margin:0">Lihat konser</a></div>
+    <div><h4>Jelajahi</h4><a href="#home">Home</a><a href="#events">Events</a><a href="#cek">Cek Tiket</a></div>
+    <div><h4>Akun</h4><a href="#" onclick="openAuth();return false">Sign in</a><a href="#pesanan">Pesanan Saya</a></div>
+    <div><h4>Bantuan</h4><a>Panduan</a><a>Kebijakan Privasi</a><a>Syarat dan Ketentuan</a></div>
+  </div>
+  <div class="word">SPOTLITE</div>
+  <div class="cp"><span>© 2026 Spotlite · Aplikasi demo tugas. Nama artis dan data konser hanya contoh.</span></div>
+</div></div></footer>
+
+<!-- ===== MODAL SIGN IN ===== -->
+<div class="modal" id="modal" onclick="if(event.target===this)closeAuth()">
+  <div class="auth">
+    <button class="x" onclick="closeAuth()" aria-label="Tutup">&#10005;</button>
+    <div class="art">
+      <div class="orb" style="width:260px;height:260px;left:-60px;top:-40px;background:radial-gradient(circle,rgba(255,255,255,.55),transparent 65%)"></div>
+      <div class="orb" style="width:180px;height:180px;right:-40px;top:140px;background:radial-gradient(circle,rgba(255,156,245,.6),transparent 65%)"></div>
+      <div class="orb" style="width:70px;height:70px;left:60px;top:150px;border:2px solid rgba(255,255,255,.7);box-shadow:0 0 30px rgba(255,156,245,.9)"></div>
+      <h2>Masuk. Beli.<br>Nonton.</h2><p>Akun membuat pembelianmu tercatat dan bisa dikonfirmasi kalau ada kendala.</p>
+    </div>
+    <div class="frm">
+      <div class="seg"><button class="on" id="tLogin" onclick="authTab('login')">Masuk</button><button id="tReg" onclick="authTab('reg')">Daftar</button></div>
+      <div class="errmsg show" id="authNote" style="display:none;color:var(--pink)"></div>
+      <button class="gbtn"><b style="font-size:16px;font-weight:700">G</b> Lanjut dengan Google</button>
+      <div class="or">ATAU</div>
+      <div id="fReg" style="display:none"><label class="lb">Nama lengkap</label><input class="field" id="rNama" placeholder="Nama lengkap"><label class="lb">Nomor HP</label><input class="field" id="rHp" placeholder="08xxxxxxxxxx"></div>
+      <label class="lb">Email</label><input class="field" id="aEmail" placeholder="name@email.com">
+      <label class="lb">Kata sandi</label><div class="pw"><input class="field" id="aPass" type="password" placeholder="Minimal 8 karakter"><button onclick="const i=document.getElementById('aPass');i.type=i.type==='password'?'text':'password'" aria-label="Lihat sandi">&#128065;</button></div>
+      <div class="errmsg" id="aErr"></div>
+      <label class="chk"><input type="checkbox" id="aChk" checked> <span>Saya menyetujui Syarat dan Ketentuan serta Kebijakan Privasi Spotlite.</span></label>
+      <button class="btn w" id="aBtn" onclick="submitAuth()">Masuk</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   DATA CONTOH (dummy) - ganti sesuai kebutuhan
+   ========================================================= */
+const C=[
+ {a:'ENHYPEN',tour:'WORLD TOUR',y:'JAKARTA 2026',n:'WORLD TOUR: JAKARTA',date:'Sab, 12 Des 2026',mon:'DES',day:'12',venue:'Nusantara Arena',city:'Jakarta',price:850000,t:'#FF9CF5',st:'Tersedia',bc:'b-ok'},
+ {a:'NCT 127',tour:'NEO CITY',y:'BANDUNG 2026',n:'NEO CITY: BANDUNG',date:'Sab, 19 Des 2026',mon:'DES',day:'19',venue:'Sasana Arena',city:'Bandung',price:750000,t:'#D400FF',st:'Tersedia',bc:'b-ok'},
+ {a:'EXO',tour:'PLANET TOUR',y:'SURABAYA 2027',n:'PLANET TOUR: SURABAYA',date:'Min, 10 Jan 2027',mon:'JAN',day:'10',venue:'Gelora Dome',city:'Surabaya',price:950000,t:'#FF9CF5',st:'Sisa sedikit',bc:'b-warn'},
+ {a:'TXT',tour:'ACT',y:'BALI 2027',n:'ACT: BALI',date:'Sab, 6 Feb 2027',mon:'FEB',day:'06',venue:'Pantai Hall',city:'Bali',price:800000,t:'#8B3FD0',st:'Tersedia',bc:'b-ok'},
+ {a:'SEVENTEEN',tour:'FOLLOW',y:'YOGYAKARTA 2027',n:'FOLLOW: YOGYAKARTA',date:'Sab, 20 Mar 2027',mon:'MAR',day:'20',venue:'Jogja Expo Arena',city:'Yogyakarta',price:900000,t:'#FF9CF5',st:'Segera dibuka',bc:'b-soon'},
+ {a:'aespa',tour:'SYNK',y:'MEDAN 2027',n:'SYNK: MEDAN',date:'Min, 4 Apr 2027',mon:'APR',day:'04',venue:'Medan Sport Arena',city:'Medan',price:700000,t:'#D400FF',st:'Tersedia',bc:'b-ok'},
+ {a:'NCT DREAM',tour:'THE DREAM SHOW',y:'JAKARTA 2027',n:'THE DREAM SHOW: JAKARTA',date:'Sab, 24 Apr 2027',mon:'APR',day:'24',venue:'Nusantara Arena',city:'Jakarta',price:780000,t:'#FF9CF5',st:'Tersedia',bc:'b-ok'},
+ {a:'Stray Kids',tour:'DOMINATE',y:'BANDUNG 2027',n:'DOMINATE: BANDUNG',date:'Sab, 15 Mei 2027',mon:'MEI',day:'15',venue:'Sasana Arena',city:'Bandung',price:820000,t:'#8B3FD0',st:'Segera dibuka',bc:'b-soon'}
+];
+const CATS=[{k:'Festival',m:1,s:420},{k:'CAT 1',m:1.4,s:180},{k:'VIP',m:2.2,s:35}];
+const FEE=10000, idr=n=>'Rp'+n.toLocaleString('id-ID');
+const poster=c=>`<div class="poster" style="--t:${c.t}"><div class="tour">${c.tour}</div><div class="art">${c.a}</div><div class="yr">${c.y}</div></div>`;
+const evCard=(c,i)=>`<div class="ev" onclick="openDetail(${i})">${poster(c)}<h3>${c.a} - ${c.n}</h3><div class="mut" style="font-size:12px">${c.date}</div><span class="tag">K-pop · mulai dari ${idr(c.price)}</span><div class="bar"><div class="dt">${c.mon}<b>${c.day}</b></div><div><div style="font-size:12px;font-weight:600">${c.venue}</div><div class="mut" style="font-size:11px">${c.city}</div></div><span class="badge ${c.bc}" style="margin-left:auto;font-size:10px">${c.st}</span></div></div>`;
+
+/* ---- render ---- */
+document.getElementById('gridHome').innerHTML=C.slice(0,4).map((c,i)=>evCard(c,i)).join('');
+document.getElementById('gridEvents').innerHTML=C.map((c,i)=>evCard(c,i)).join('');
+document.getElementById('oPoster2').innerHTML=poster(C[1]);document.getElementById('oPoster3').innerHTML=poster(C[2]);
+document.getElementById('tbody').innerHTML=C.slice(0,5).map((c,i)=>`<tr id="r${i}"><td>${c.a} - ${c.n}</td><td>${c.date.split(', ')[1]}</td><td>${c.city}</td><td><span class="badge ${c.bc}" id="s${i}">${c.st}</span></td><td id="a${i}"><button class="chip">Ubah</button> <button class="chip" style="color:var(--bad)" onclick="softDel(${i})">Hapus</button></td></tr>`).join('');
+function softDel(i){const r=document.getElementById('r'+i);r.classList.add('del');document.getElementById('s'+i).className='badge b-bad';document.getElementById('s'+i).textContent='Dihapus';document.getElementById('a'+i).innerHTML=`<button class="chip" onclick="restore(${i})">Pulihkan</button>`}
+function restore(i){const c=C[i],r=document.getElementById('r'+i);r.classList.remove('del');document.getElementById('s'+i).className='badge '+c.bc;document.getElementById('s'+i).textContent=c.st;document.getElementById('a'+i).innerHTML=`<button class="chip">Ubah</button> <button class="chip" style="color:var(--bad)" onclick="softDel(${i})">Hapus</button>`}
+/* QR contoh */
+document.querySelectorAll('.qr').forEach(q=>{let s=7;const r=()=>{s=(s*9301+49297)%233280;return s/233280},N=21;
+ const f=(x,y)=>{const b=(ox,oy)=>{const dx=x-ox,dy=y-oy;if(dx<0||dy<0||dx>6||dy>6)return null;return dx==0||dx==6||dy==0||dy==6||(dx>=2&&dx<=4&&dy>=2&&dy<=4)};
+  for(const [ox,oy] of [[0,0],[14,0],[0,14]]){const v=b(ox,oy);if(v!==null)return v}
+  if((x==7||x==13)&&y<8||(y==7||y==13)&&x<8)return false;return r()>.52};
+ let h='';for(let y=0;y<N;y++)for(let x=0;x<N;x++)h+=`<s class="${f(x,y)?'k':''}"></s>`;q.innerHTML=h});
+
+/* ---- carousel setengah lingkaran ---- */
+const stage=document.getElementById('stage');
+stage.innerHTML=C.map((c,i)=>`<div class="c" data-i="${i}">${poster(c)}</div>`).join('');
+const cards=[...stage.children];let act=0,timer;
+function layout(){const N=C.length;
+ cards.forEach((el,i)=>{let d=i-act;if(d>N/2)d-=N;if(d<-N/2)d+=N;const v=Math.abs(d)<=3;
+  el.style.transform=`rotate(${d*17}deg)`;el.style.opacity=v?1-Math.abs(d)*.2:0;el.style.zIndex=10-Math.abs(d);el.style.pointerEvents=v?'auto':'none';el.classList.toggle('act',d===0)});
+ const c=C[act];document.getElementById('now').innerHTML=`<h2>${c.a} - ${c.n}</h2><div class="meta">${c.date} · ${c.venue}, ${c.city} · mulai dari ${idr(c.price)}</div><button class="btn" onclick="openDetail(${act})">Beli tiket</button>`}
+function move(n){act=(act+n+C.length)%C.length;layout();restart()}
+function restart(){clearInterval(timer);timer=setInterval(()=>{if(location.hash==''||location.hash=='#home')move(1)},4500)}
+cards.forEach((el,i)=>el.addEventListener('click',()=>{if(i===act)openDetail(i);else{act=i;layout();restart()}}));
+let sx=null;const arc=document.getElementById('arc');
+arc.addEventListener('pointerdown',e=>sx=e.clientX);
+window.addEventListener('pointerup',e=>{if(sx===null)return;const d=e.clientX-sx;sx=null;if(Math.abs(d)>50)move(d<0?1:-1)});
+layout();restart();
+
+/* ---- detail, checkout ---- */
+let sel=0,qty=[0,0,0],signed=false,pending=null,tmr;
+function openDetail(i){sel=i;qty=[0,1,0];renderDetail();location.hash='detail'}
+function renderDetail(){const c=C[sel];
+ document.getElementById('dCrumb').textContent=c.a;document.getElementById('dPoster').innerHTML=poster(c);
+ document.getElementById('dTitle').textContent=c.a+' - '+c.n;document.getElementById('dMeta').innerHTML=c.date+'<br>'+c.venue+', '+c.city;
+ document.getElementById('cats').innerHTML=CATS.map((k,j)=>`<div class="row"><div><b>${k.k}</b><div class="mut" style="font-size:12px">Sisa ${k.s} tiket</div></div><div style="text-align:right"><b>${idr(Math.round(c.price*k.m/1000)*1000)}</b><div style="margin-top:4px"><span class="stepper"><button onclick="chg(${j},-1)">-</button><span id="q${j}">${qty[j]}</span><button onclick="chg(${j},1)">+</button></span></div></div></div>`).join('');
+ total()}
+const price=j=>Math.round(C[sel].price*CATS[j].m/1000)*1000;
+function total(){document.getElementById('dTotal').textContent=idr(qty.reduce((s,q,j)=>s+q*price(j),0));qty.forEach((q,j)=>{const e=document.getElementById('q'+j);if(e)e.textContent=q})}
+function chg(j,d){const t=qty.reduce((a,b)=>a+b,0),e=document.getElementById('dErr');e.classList.remove('show');
+ if(d>0&&t>=4){e.textContent='Maksimal 4 tiket per pesanan.';e.classList.add('show');return}
+ qty[j]=Math.max(0,qty[j]+d);total()}
+function toCheckout(){const t=qty.reduce((a,b)=>a+b,0),e=document.getElementById('dErr');
+ if(t<1){e.textContent='Pilih minimal 1 tiket.';e.classList.add('show');return}
+ if(!signed){pending='checkout';openAuth('Masuk dulu untuk melanjutkan pembelian.');return}
+ location.hash='checkout'}
+function renderCheckout(){const c=C[sel],j=qty.findIndex(q=>q>0),jj=j<0?1:j,q=j<0?1:qty[j],sub=price(jj)*q;
+ document.getElementById('cPoster').innerHTML=poster(c);document.getElementById('cTitle').textContent=c.a+' - '+c.n;document.getElementById('cMeta').textContent=c.date+' · '+c.venue+', '+c.city;
+ document.getElementById('cLine').textContent=CATS[jj].k+' × '+q;document.getElementById('cSub').textContent=idr(sub);document.getElementById('cTot').textContent=idr(sub+FEE);
+ clearInterval(tmr);let s=15*60;const el=document.getElementById('tm');tmr=setInterval(()=>{s=Math.max(0,s-1);el.textContent=String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')},1000)}
+function pay(){const v=document.getElementById('cHp').value.replace(/\D/g,''),e=document.getElementById('hpErr'),f=document.getElementById('cHp');
+ if(v.length<10){e.classList.add('show');f.classList.add('err');return}e.classList.remove('show');f.classList.remove('err');location.hash='pesanan'}
+
+/* ---- cek tiket ---- */
+function fill(v){document.getElementById('kode').value=v;cekTiket()}
+function cekTiket(){const k=document.getElementById('kode').value.trim().toUpperCase(),r=document.getElementById('res');
+ let h;if(!k){h=`<span class="badge b-warn">Kosong</span><h3 style="margin-top:8px">Masukkan kode tiket terlebih dahulu</h3>`}
+ else if(k==='SPL-8F2K-91QD')h=`<span class="badge b-ok">Asli</span><h3 style="margin-top:8px">Tiket valid dan belum dipakai</h3><p class="mut" style="font-size:12px">ENHYPEN - WORLD TOUR: JAKARTA · CAT 1 · Pemegang: Athalia</p>`;
+ else if(k==='SPL-USED-0001')h=`<span class="badge b-warn">Sudah dipakai</span><h3 style="margin-top:8px">Tiket ini sudah dipindai pada 12 Des 2026, 18.42</h3><p class="mut" style="font-size:12px">Waspada jika kamu membeli tiket ini dari pihak lain.</p>`;
+ else h=`<span class="badge b-bad">Tidak ditemukan</span><h3 style="margin-top:8px">Kode tidak terdaftar di Spotlite</h3><p class="mut" style="font-size:12px">Tiket mungkin palsu. Jangan lakukan pembayaran lagi.</p>`;
+ r.innerHTML=h;r.classList.add('show')}
+
+/* ---- sign in modal ---- */
+let mode='login';
+function openAuth(note){document.getElementById('modal').classList.add('open');const n=document.getElementById('authNote');n.style.display=note?'block':'none';n.textContent=note||''}
+function closeAuth(){document.getElementById('modal').classList.remove('open')}
+function authTab(m){mode=m;document.getElementById('tLogin').classList.toggle('on',m==='login');document.getElementById('tReg').classList.toggle('on',m==='reg');
+ document.getElementById('fReg').style.display=m==='reg'?'block':'none';document.getElementById('aBtn').textContent=m==='reg'?'Buat akun':'Masuk'}
+function submitAuth(){const e=document.getElementById('aEmail'),p=document.getElementById('aPass'),er=document.getElementById('aErr');let msg='';
+ [e,p].forEach(x=>x.classList.remove('err'));
+ if(!/^\S+@\S+\.\S+$/.test(e.value)){msg='Format email belum benar.';e.classList.add('err')}
+ else if(p.value.length<8){msg='Kata sandi minimal 8 karakter.';p.classList.add('err')}
+ else if(mode==='reg'&&document.getElementById('rNama').value.trim()===''){msg='Nama lengkap wajib diisi.'}
+ else if(!document.getElementById('aChk').checked){msg='Setujui syarat dan ketentuan dulu.'}
+ er.textContent=msg;er.classList.toggle('show',!!msg);if(msg)return;
+ signed=true;closeAuth();const b=document.getElementById('bAuth');b.textContent='Athalia';b.onclick=()=>location.hash='pesanan';
+ if(pending){const p2=pending;pending=null;location.hash=p2}}
+/* ---- dropdown header ---- */
+function closeDD(){document.querySelectorAll('.dd').forEach(d=>d.classList.remove('open'));document.querySelectorAll('.ic').forEach(i=>i.classList.remove('on'))}
+function tog(btn,id){const d=document.getElementById(id),o=d.classList.contains('open');closeDD();if(!o){d.classList.add('open');btn.classList.add('on')}}
+document.getElementById('bSearch').onclick=e=>{e.stopPropagation();tog(e.currentTarget,'ddSearch')};
+document.getElementById('bLang').onclick=e=>{e.stopPropagation();tog(e.currentTarget,'ddLang')};
+document.addEventListener('click',e=>{if(!e.target.closest('.dd'))closeDD()});
+function pickLang(el){document.querySelectorAll('#ddLang .opt').forEach(o=>{o.classList.remove('on');o.lastElementChild.textContent=''});el.classList.add('on');el.lastElementChild.innerHTML='&#10003;'}
+
+/* ---- router antar halaman mockup ---- */
+const ids=['home','events','detail','checkout','pesanan','cek','admin'];
+function show(){let id=location.hash.slice(1);if(!ids.includes(id))id='home';
+ document.querySelectorAll('.page').forEach(p=>p.classList.toggle('on',p.id==='p-'+id));
+ document.querySelectorAll('[data-tab]').forEach(a=>a.classList.toggle('on',a.dataset.tab===id));
+ document.querySelectorAll('[data-nav]').forEach(a=>a.classList.toggle('on',a.dataset.nav===id||(id==='detail'&&a.dataset.nav==='events')));
+ if(id==='detail')renderDetail();if(id==='checkout')renderCheckout();closeDD();window.scrollTo(0,0)}
+window.addEventListener('hashchange',show);
+renderDetail();show();
+</script>
+</body>
+</html>
